@@ -12,6 +12,15 @@
     <title>Full Stack Admission Test</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.11.4/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/default.css"/>
+    <style>
+      #ofFile {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+      }
+    </style>
     <script type="text/javascript" src="assets/js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.11.4/datatables.min.js"></script>
@@ -70,9 +79,21 @@
         } 
         console.log(dataSet);
         
-        $('#myTable').DataTable( {
+        var table = $('#myTable').DataTable( {
           stateSave: true,
           data: dataSet,
+          columnDefs: [{
+            targets: "_all",
+            orderable: true,
+            className: 'dt-body-left'
+          }],
+          order: [[1, 'asc']],          
+          orderCellsTop: true,
+          scrollX: true,
+          searching: true,
+          fixedColumns: true,
+          pageLength: 5,
+          lengthChange: false,
           columns: [
             { title: "nome" },
             { title: "numAcesso" },
@@ -89,16 +110,38 @@
             { title: "especial" },
             { title: "urgente" },
             { title: "restaurado" }
-          ]
-        }); 
+          ],
+        });
         $("#ofFile").click(function(event) { // Botão de RESET, carrega outro JSON no cache.
           loadJson(); // Faz a leitura do arquivo JSON.
-        });         
+        });
       });
     </script>
   </head>
   <body>
-    <table id="myTable" class="display" width="100%"></table>
+    <div class="topbar text-center">
+      <span class="innertop"><small>Anamnese&nbsp;</small><i class="fa fa-repeat" aria-hidden="true"></i></span>
+    </div>  
+    <div class="sidebar">
+      <div class="text-center justify-content-center align-items-center" >
+        <img src="assets/images/logo-anamnese.png" style="padding-top:20px;" />
+        <p style="padding-top:20px;">
+        <strong>Bem vindo(a),&nbsp;<span class="text-info">Usuário</span></strong>
+        </p>
+        <p style="padding-top:20px;">
+          <button type="button" class="btn btn-primary">Sair</button>
+        </p>
+        <img src="assets/images/logo-medilab.png" style="padding-top:320px;" />
+      </div>
+    </div>
+    <div class="content">
+      <h3 style="padding-top:40px;"><b>Título</b></h3>
+        <div class="table-responsive overflow-hidden d-none text-center">
+          <table id="myTable" width="100%" class="display table table-bordered table-hover text-nowrap">
+          </table>
+        </div>
+      </div>
+    </div>
     <input id="ofFile" type="button" value="New JSON" />
   </body>
 </html>    
