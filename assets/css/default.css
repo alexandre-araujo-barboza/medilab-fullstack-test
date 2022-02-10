@@ -1,7 +1,10 @@
 /* The side navigation menu */
 .sidebar {
   margin: 0;
-  padding: 0;
+  padding-top: 30px;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
   width: 240px;
   background-color: #f1f1f1;
   position: fixed;
@@ -16,6 +19,7 @@
   position: fixed;
   height: 30px;
   overflow: auto;
+  z-index: 1;
 }
 .innertop {
   padding-left: 65px;
@@ -35,6 +39,7 @@ div.content {
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
 @media screen and (max-width: 700px) {
   .sidebar {
+    top: 30px;
     width: 100%;
     height: auto;
     position: relative;
