@@ -5,10 +5,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	  <meta name="description" content="MedLab, prova fullstack." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MedLab, prova fullstack." />
     <meta name="Author" content="Alexandre A. Barbosa, alexandre.araujo.barboza@gmail.com" />
-	  <meta name="robots" content="noindex" />
+    <meta name="robots" content="noindex" />
     <title>Full Stack Admission Test</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.11.4/datatables.min.css"/>
@@ -27,36 +27,34 @@
     <script>
       function loadJson() {
         user = "assets/json/data.json"; // Faz a leitura do arquivo JSON.
-	      $.ajax({
+        $.ajax({
           url:      user,
           type:     'GET',
           cache:    false,
-	        dataType: 'json',
-		      complete: function (content, status) {
+          dataType: 'json',
+          complete: function (content, status) {
             if (status === 'error' || !content.responseText) {
               alert(content.status + " " + content.statusText + "\nCan not read input file...");
             } else {
-		          localStorage.setItem("json_data", content.responseText); // Grava dados do JSON no cache.
-		          location.reload(); // Recarrega a página.
+              localStorage.setItem("json_data", content.responseText); // Grava dados do JSON no cache.
+              location.reload(); // Recarrega a página.
             }
 		      }	
 	      });
       }
       $(document).ready(function() {
-	      var data = localStorage.getItem("json_data"); // Faz a leitura diretamente do cache.
-	      var parsed;
-	      if (data) { // Se houverem dados no cache. 
-	        try {
+        var data = localStorage.getItem("json_data"); // Faz a leitura diretamente do cache.
+        var parsed;
+        if (data) { // Se houverem dados no cache. 
+          try {
             parsed = $.parseJSON(data); // Carrega objeto com o JSON.
             console.log(parsed);
-             
           } catch (e) {
             alert("Can not read JSON data!\n" + e);
           }
 	      } else { // Se não houverem dados no cache. 
-	        loadJson(); // Faz a leitura do arquivo JSON.
+          loadJson(); // Faz a leitura do arquivo JSON.
         }
-        
         var dataSet = []; 
         for (var i =0 ; i < parsed.length; i++) { // Transforma o JSON em matriz.
           var dataRow = [];
@@ -78,8 +76,7 @@
           dataSet.push(dataRow);
         } 
         console.log(dataSet);
-        
-        var table = $('#myTable').DataTable( {
+        var table = $('#myTable').DataTable( { // Carrega o DataTable
           stateSave: true,
           data: dataSet,
           columnDefs: [{
