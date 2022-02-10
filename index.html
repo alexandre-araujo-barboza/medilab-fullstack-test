@@ -39,8 +39,8 @@
               localStorage.setItem("json_data", content.responseText); // Grava dados do JSON no cache.
               location.reload(); // Recarrega a página.
             }
-		      }	
-	      });
+          }	
+        });
       }
       $(document).ready(function() {
         var data = localStorage.getItem("json_data"); // Faz a leitura diretamente do cache.
@@ -52,7 +52,7 @@
           } catch (e) {
             alert("Can not read JSON data!\n" + e);
           }
-	      } else { // Se não houverem dados no cache. 
+        } else { // Se não houverem dados no cache. 
           loadJson(); // Faz a leitura do arquivo JSON.
         }
         var dataSet = []; 
