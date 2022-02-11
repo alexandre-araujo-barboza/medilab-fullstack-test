@@ -108,6 +108,37 @@
             { title: "urgente" },
             { title: "restaurado" }
           ],
+          initComplete: function () { 
+            this.api().columns(4).every(function () { // Filtra por data
+              var column = this;
+              var input = $('<input type="date" value="' + parsed[0].data + '" />')
+                .appendTo($('#filters'))
+                .on('keyup', function () {
+                  var val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                  );
+                  column
+                    .search( val ? '^' + val + '$' : '', true, false )
+                    .draw();          
+                  }); 
+            });
+            this.api().columns(5).every(function () { // Filtra por modalidade
+              var column = this;
+              var select = $('<select><option value="">Modalidade</option></select>')
+                .appendTo($('#filters'))
+                .on('change', function () {
+                  var val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                  );
+                  column
+                    .search( val ? '^' + val + '$' : '', true, false )
+                    .draw();
+                  });
+                  column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="' + d + '">' + d + '</option>' )
+                  });
+            });
+          },
         });
         $("#ofFile").click(function(event) { // Botão de RESET, carrega outro JSON no cache.
           loadJson(); // Faz a leitura do arquivo JSON.
@@ -133,6 +164,8 @@
     </div>
     <div class="content">
       <h3 style="padding-top:40px;"><b>Título</b></h3>
+        <div id="filters" class="row-flex">
+        </div>
         <div class="table-responsive overflow-hidden d-none text-center">
           <table id="myTable" width="100%" class="display table table-bordered table-hover text-nowrap">
           </table>
