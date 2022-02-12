@@ -120,7 +120,7 @@
                   column
                     .search( val ? '^' + val + '$' : '', true, false )
                     .draw();          
-                  }); 
+                }); 
             });
             this.api().columns(5).every(function () { // Filtra por modalidade
               var column = this;
@@ -133,10 +133,10 @@
                   column
                     .search( val ? '^' + val + '$' : '', true, false )
                     .draw();
-                  });
-                  column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="' + d + '">' + d + '</option>' )
-                  });
+                });
+                column.data().unique().sort().each( function ( d, j ) {
+                  select.append( '<option value="' + d + '">' + d + '</option>' )
+                });
             });
           },
         });
